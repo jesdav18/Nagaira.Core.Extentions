@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 	  <Authors>Nagaira Developers</Authors>
-	  <Version>1.0.0.5</Version>
+	  <Version>1.0.0.6</Version>
 	  <Product>Nagaira.Datalayer.Core</Product>
 	  <Description>Extensiones y utilidades para capa de datos (DbContext, patrón repositorio).</Description>
 	  <Nullable>enable</Nullable>
@@ -12,10 +12,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
