@@ -1,4 +1,4 @@
-﻿namespace Diunsa.Core.Extentions.Standard
+﻿namespace Nagaira.Core.Extentions.Standard
 {
     public static class BooleanUtility
     {

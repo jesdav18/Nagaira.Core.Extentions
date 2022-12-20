@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Diunsa.Core.Extentions.Standard
+namespace Nagaira.Core.Extentions.Standard
 {
     public static class StreamUtility
     {

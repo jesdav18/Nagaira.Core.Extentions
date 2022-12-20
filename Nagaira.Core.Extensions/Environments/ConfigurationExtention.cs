@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Diunsa.Core.Extentions.Environments
+namespace Nagaira.Core.Extentions.Environments
 {
     public static class ConfigurationExtention
     {

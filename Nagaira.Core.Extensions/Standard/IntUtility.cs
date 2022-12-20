@@ -1,7 +1,7 @@
-﻿using Diunsa.Core.Extentions.Dictionaries;
+﻿using Nagaira.Core.Extentions.Dictionaries;
 using System;
 
-namespace Diunsa.Core.Extentions.Standard
+namespace Nagaira.Core.Extentions.Standard
 {
     public static class IntUtility
     {

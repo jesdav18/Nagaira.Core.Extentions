@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Diunsa.Core.Extentions.Standard
+namespace Nagaira.Core.Extentions.Standard
 {
     public static class StringUtility
     {

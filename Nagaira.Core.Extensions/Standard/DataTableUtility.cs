@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 
-namespace Diunsa.Core.Extentions.Standard
+namespace Nagaira.Core.Extentions.Standard
 {
     public static class DataTableUtility
     {

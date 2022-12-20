@@ -1,4 +1,4 @@
-﻿namespace Diunsa.Core.Extentions.Responses
+﻿namespace Nagaira.Core.Extentions.Responses
 {
     public enum TypeResponse
     {

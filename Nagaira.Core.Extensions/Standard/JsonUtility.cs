@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Diunsa.Core.Extentions.Standard
+namespace Nagaira.Core.Extentions.Standard
 {
     public static class JsonUtility
     {

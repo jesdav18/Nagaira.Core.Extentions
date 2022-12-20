@@ -2,7 +2,7 @@
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Diunsa.DataLayer.Core.Extentions
+namespace Nagaira.DataLayer.Core.Extentions
 {
     public static class DbContextExtentions
     {

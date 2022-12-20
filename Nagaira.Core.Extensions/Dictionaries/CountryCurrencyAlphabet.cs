@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Diunsa.Core.Extentions.Dictionaries
+namespace Nagaira.Core.Extentions.Dictionaries
 {
     public static class CountryCurrencyAlphabet
     {
