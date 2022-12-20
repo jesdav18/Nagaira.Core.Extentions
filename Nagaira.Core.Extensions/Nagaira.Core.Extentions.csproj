@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-	<Authors>Diunsa Developers</Authors>
+	<Authors>Nagaira Developers</Authors>
 	<Version>1.0.0.3</Version>
-	<Product>Diunsa.Core.Extentions</Product>
+	<Product>Nagaira.Core.Extentions</Product>
 	<Description>Extensiones y utilidades standard para desarrollo de software.</Description>
     <Nullable>enable</Nullable>
   </PropertyGroup>
