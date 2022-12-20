@@ -3,10 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 	  <Authors>Nagaira Developers</Authors>
-	  <Version>1.0.0.4</Version>
+	  <Version>1.0.0.5</Version>
 	  <Product>Nagaira.Datalayer.Core</Product>
 	  <Description>Extensiones y utilidades para capa de datos (DbContext, patrón repositorio).</Description>
 	  <Nullable>enable</Nullable>
+	  <Copyright>Nagaira 2022</Copyright>
+	  <PackageProjectUrl>Nagaira.com</PackageProjectUrl>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
