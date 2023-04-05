@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
 	<Authors>Nagaira Developers</Authors>
-	<Version>1.0.0.5</Version>
+	<Version>1.0.0.6</Version>
 	<Product>Nagaira.Core.Extentions</Product>
 	<Description>Extensiones y utilidades standard para desarrollo de software.</Description>
     <Nullable>enable</Nullable>
-    <Copyright>Nagaira 2022</Copyright>
+    <Copyright>Nagaira 2023</Copyright>
     <PackageProjectUrl>Nagaira.com</PackageProjectUrl>
     <PackAsTool>False</PackAsTool>
   </PropertyGroup>
