@@ -47,17 +47,17 @@ The `Response<TData>` class inherits from the `Response` class and adds an addit
 -   `EntityWarning(string message, TData data)`: Creates an instance of `Response<TData>` with the `EntityWarning` type, the message, and the specified data. It is used when an entity resolves itself using a `Validate` method and turns out to be invalid due to one or more of its mandatory fields being invalid.
 -   `NotFound(string message, TData data)`: Creates an instance of `Response<TData>` with the `NotFound` type, the message, and the specified data. It is used when the required data has not been found.
 
-##### MessageException Class
+##### `MessageException`
 
 The `MessageException` class provides a static method for retrieving the exception message, including the inner exception message if present.
 
 Retrieves the exception message, including the inner exception message if present.
 
-#### Parameters
+**Parameters:**
 
--   `exception`: An `Exception` object representing the exception for which to retrieve the message.
+-   `Exception`: An `Exception` object representing the exception for which to retrieve the message. Send the Exception from try-catch block.
 
-#### Return Value
+**Return Value:**
 
 A string containing the exception message.
 

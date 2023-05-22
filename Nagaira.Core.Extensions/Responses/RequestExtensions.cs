@@ -20,15 +20,19 @@
         public static Response NotFound(string message) => new Response { Type = TypeResponse.NotFound, Message = message };
     }
 
-    public class Response<TData> : Response
+    public class Response<TData>
     {
-        public static Response<TData> Ok(string message, TData? data) => new Response<TData> { Type = TypeResponse.Ok, Message = message, Data = data };
-        public static Response<TData> Exception(string message, TData? data) => new Response<TData> { Type = TypeResponse.Exception, Message = message, Data = data };
-        public static Response<TData> Warning(string message, TData? data) => new Response<TData> { Type = TypeResponse.Warning, Message = message, Data = data };
-        public static Response<TData> WarningEntity(string message, TData? data) => new Response<TData> { Type = TypeResponse.EntityWarning, Message = message, Data = data };
-        public static Response<TData> NotFound(string message, TData? data) => new Response<TData> { Type = TypeResponse.NotFound, Message = message, Data = data };
+        public static Response<TData> Ok(TypeResponse type, string message, TData? data = default) => new Response<TData> { Type = type, Message = message, Data = data };
+        public static Response<TData> Exception(TypeResponse type, string message, TData? data = default) => new Response<TData> { Type = type, Message = message, Data = data };
+        public static Response<TData> Warning(TypeResponse type, string message, TData? data = default) => new Response<TData> { Type = type, Message = message, Data = data };
+        public static Response<TData> EntityWarning(TypeResponse type, string message, TData? data = default) => new Response<TData> { Type = type, Message = message, Data = data };
+        public static Response<TData> NotFound(TypeResponse type, string message, TData? data = default) => new Response<TData> { Type = type, Message = message, Data = data };
+        public TypeResponse Type { get; set; }
+        public string? Message { get; set; }
         public TData? Data { get; set; }
     }
+
+
 
 
 }
