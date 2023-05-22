@@ -8,7 +8,7 @@ namespace Nagaira.Core.Extentions.Standard
     public static class DataTableUtility
     {
         /// <summary>
-        /// Permite obtener el primer registro de un DataTable convertido en la entidad (Tipo abstacto de dato) especificada.
+        /// It allows obtaining the first record of a DataTable converted to the entity(abstract data type) specified.
         /// </summary>
         /// <typeparam name="DataTable"></typeparam>
         /// <param name="dataTable"></param>
@@ -25,7 +25,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Permite obtener el registro de un DataRow convertido en la entidad (Tipo abstracto de dato) especificada.
+        /// It allows obtaining the record of a DataRow converted into the entity (abstract data type) specified.
         /// </summary>
         /// <typeparam name="DataTable"></typeparam>
         /// <param name="dataTable"></param>
@@ -49,7 +49,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Permite convertir un DataTable a una lista de objetos del tipo entidad (Tipo abstracto de datos) especificada.
+        /// Allows you to convert a DataTable to a list of objects of the type entity(Abstract Data Type) specified.
         /// </summary>
         /// <typeparam name="DataTable"></typeparam>
         /// <param name="dataTable"></param>

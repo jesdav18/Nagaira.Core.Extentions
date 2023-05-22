@@ -3,6 +3,7 @@ using System;
 
 namespace Nagaira.Core.Extentions.Standard
 {
+    //Funcionality worked for spanish
     public static class IntUtility
     {
         public static string ToAlphabet(this int value, string currencyId)

@@ -3,7 +3,7 @@
     public static class BooleanUtility
     {
         /// <summary>
-        /// Convierte un valor boolean a 1 o 0. Esto es útil scripts de SQL Server donde se requiere mandar un booleano como 1 o 0.
+        /// Converts a boolean value to 1 or 0. This is useful for SQL Server scripts where a boolean is required to be passed as 1 or 0.
         /// </summary>
         /// <typeparam name="bool"></typeparam>
         /// <param name="valor"></param>

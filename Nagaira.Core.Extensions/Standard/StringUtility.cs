@@ -4,13 +4,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using Nagaira.Core.Extentions.Exceptions;
 
 namespace Nagaira.Core.Extentions.Standard
 {
     public static class StringUtility
     {
         /// <summary>
-        /// Determina si una cadena de texto contiene sólo letras
+        /// Determines if a text string contains only letters
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
@@ -21,7 +22,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Convierte una cadena de texto en su totalidad a mayúsculas
+        /// Converts an entire text string to uppercase
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
@@ -40,7 +41,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Determina si una cadena de texto contiene el cuerpo aceptado de un e-mail
+        /// Determines if a text string contains the accepted body of an email
         /// </summary>
         /// <typeparam name="string"></typeparam>
         /// <param name="value"></param>
@@ -51,7 +52,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Decodifica una cadena de texto que ha sido codificada con Base64
+        /// Decodes a text string that has been encoded with Base64
         /// </summary>
         /// <typeparam name="string"></typeparam>
         /// <param name="value"></param>
@@ -71,13 +72,13 @@ namespace Nagaira.Core.Extentions.Standard
             }
             catch (Exception ex)
             {
-                return RaiseGeneralException(ex);
+                return MessageException.ShowException(ex);
             }
 
         }
 
         /// <summary>
-        /// Convierte un valor strign a una cadena de texto que no contiene tildes.
+        /// Converts a strign value to a text string that does not contain tildes (spanish).
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
@@ -89,7 +90,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Convierte un valor tipo string a un arreglo de bytes.
+        /// Converts a strign value to a text string that does not contain tildes.
         /// </summary>
         /// <typeparam name="string"></typeparam>
         /// <param name="value"></param>
@@ -101,7 +102,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Convierte un arreglo de bytes a una cadena string en formato Hash.
+        /// Converts a byte array to a string in hash format.
         /// </summary>
         /// <typeparam name="byte[]"></typeparam>
         /// <param name="value"></param>
@@ -112,7 +113,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Convierte un valor tipo string a un valor string en formato Hash.
+        /// Converts a byte array to a string in hash format.
         /// </summary>
         /// <typeparam name="string"></typeparam>
         /// <param name="value"></param>
@@ -124,7 +125,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Convierte un valor tipo string a una cadena de texto compatible con comunicación HTTP cliente/servidor.
+        /// Converts a string value to a text string compatible with HTTP client/server communication.
         /// </summary>
         /// <typeparam name="string"></typeparam>
         /// <param name="value"></param>
@@ -135,20 +136,7 @@ namespace Nagaira.Core.Extentions.Standard
         }
 
         /// <summary>
-        /// Permite lanzar una excepción evaluando el objeto InnerException, si este es distinto de nulo devuelve InnerException.Message, en caso contrario devuelve el valor de Message
-        /// </summary>
-        /// <typeparam name="Exception"></typeparam>
-        /// <param name="exception"></param>
-        /// <returns name="string"></returns>
-        public static string RaiseGeneralException(this Exception exception)
-        {
-            string message = exception.InnerException == null ? exception.Message : exception.InnerException.Message;
-            return message;
-            
-        }
-
-        /// <summary>
-        /// Convierte un valor tipo string a enum.
+        /// Converts a string value to an enum.
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
@@ -156,7 +144,7 @@ namespace Nagaira.Core.Extentions.Standard
         public static TEnum ToEnum<TEnum>(this string value) where TEnum : struct, IConvertible
         {
             bool isValidValue = Enum.TryParse(value, out TEnum enumValue);
-            if (!isValidValue) throw new InvalidCastException($"No se pudo convertir el valor ('{value}') al tipo de enum especificado.");
+            if (!isValidValue) throw new InvalidCastException($"Can not convert ('{value}') to enum time specified.");
         
             return enumValue;
         }

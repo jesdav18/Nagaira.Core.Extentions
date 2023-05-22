@@ -5,6 +5,7 @@ namespace Nagaira.Core.Extentions.Standard
 {
     public static class CurrencyUtility
     {
+        //Funcionality worked for spanish
         public static string Hundreds(this int value)
         {
             string totalCharacters = string.Empty;

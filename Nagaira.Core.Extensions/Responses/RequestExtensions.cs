@@ -3,10 +3,10 @@
     public enum TypeResponse
     {
         Ok = 1,
-        Excepcion = 2,
-        Advertencia = 3,
-        AdvertenciaEnEntidad = 4,
-        NoEncontrado = 5
+        Exception = 2,
+        Warning = 3,
+        EntityWarning = 4,
+        NotFound = 5
     }
 
     public class Response
@@ -14,19 +14,21 @@
         public string? Message { get; set; }
         public TypeResponse Type { get; set; }
         public static Response Ok(string message) => new Response { Type = TypeResponse.Ok, Message = message };
-        public static Response Excepcion(string message) => new Response { Type = TypeResponse.Excepcion, Message = message };
-        public static Response Advertencia(string message) => new Response { Type = TypeResponse.Advertencia, Message = message };
-        public static Response AdvertenciaDeEntidad(string message) => new Response { Type = TypeResponse.AdvertenciaEnEntidad, Message = message };
-        public static Response NoEncontrado(string message) => new Response { Type = TypeResponse.NoEncontrado, Message = message };
+        public static Response Exception(string message) => new Response { Type = TypeResponse.Exception, Message = message };
+        public static Response Warning(string message) => new Response { Type = TypeResponse.Warning, Message = message };
+        public static Response EntityWarning(string message) => new Response { Type = TypeResponse.EntityWarning, Message = message };
+        public static Response NotFound(string message) => new Response { Type = TypeResponse.NotFound, Message = message };
     }
 
     public class Response<TData> : Response
     {
-        public TData Data { get; set; }
-        public static Response<TData> Ok(string message, TData data) => new Response<TData> { Type = TypeResponse.Ok, Message = message, Data = data };
-        public static Response<TData> Excepcion(string message, TData data) => new Response<TData> { Type = TypeResponse.Excepcion, Message = message, Data = data };
-        public static Response<TData> Advertencia(string message, TData data) => new Response<TData> { Type = TypeResponse.Advertencia, Message = message, Data = data };
-        public static Response<TData> AdvertenciaDeEntidad(string message, TData data) => new Response<TData> { Type = TypeResponse.AdvertenciaEnEntidad, Message = message, Data = data };
-        public static Response<TData> NoEncontrado(string message, TData data) => new Response<TData> { Type = TypeResponse.NoEncontrado, Message = message, Data = data };
+        public static Response<TData> Ok(string message, TData? data) => new Response<TData> { Type = TypeResponse.Ok, Message = message, Data = data };
+        public static Response<TData> Exception(string message, TData? data) => new Response<TData> { Type = TypeResponse.Exception, Message = message, Data = data };
+        public static Response<TData> Warning(string message, TData? data) => new Response<TData> { Type = TypeResponse.Warning, Message = message, Data = data };
+        public static Response<TData> WarningEntity(string message, TData? data) => new Response<TData> { Type = TypeResponse.EntityWarning, Message = message, Data = data };
+        public static Response<TData> NotFound(string message, TData? data) => new Response<TData> { Type = TypeResponse.NotFound, Message = message, Data = data };
+        public TData? Data { get; set; }
     }
+
+
 }
