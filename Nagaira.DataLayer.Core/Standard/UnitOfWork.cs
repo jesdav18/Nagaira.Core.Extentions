@@ -24,7 +24,7 @@ namespace Farsiman.Infraestructure.Core.Entity.Standard
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
         {
             IsolationLevel isolation = GetIsolation(isolationLevel);
-            _transaccion = dbContext.Database.BeginTransaction(isolation);
+            _transaccion = dbContext.Database.BeginTransaction();
         }
 
         IsolationLevel GetIsolation(IsolationLevel isolationLevel)
