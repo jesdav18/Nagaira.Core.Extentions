@@ -14,7 +14,7 @@ namespace Nagaira.Core.Extentions.Environments
             var variables = Environment.GetEnvironmentVariables();
             foreach (string key in variables.Keys)
             {
-                if (!key.StartsWith("NA")) continue;               
+                if (!key.StartsWith("NA")) continue;
                 _listaVariables.Add(key, variables[key].ToString());
             }
         }

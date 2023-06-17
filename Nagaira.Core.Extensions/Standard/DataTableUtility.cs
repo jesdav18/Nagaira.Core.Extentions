@@ -39,9 +39,9 @@ namespace Nagaira.Core.Extentions.Standard
             {
                 foreach (PropertyInfo property in temporalObject.GetProperties())
                 {
-                    if (property.Name == column.ColumnName)                
+                    if (property.Name == column.ColumnName)
                         property.SetValue(objectInstance, DBNull.Value == dataRow[column.ColumnName] ? null : dataRow[column.ColumnName], null);
-                    
+
                 }
             }
 

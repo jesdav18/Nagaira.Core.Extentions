@@ -7,9 +7,9 @@ namespace Nagaira.Core.Extentions.Standard
     {
         public static string GetMimeType(string extension)
         {
-            if (extension == null) throw new ArgumentNullException("extension");   
+            if (extension == null) throw new ArgumentNullException("extension");
             if (!extension.StartsWith(".")) extension = "." + extension;
-         
+
             string mime;
             return _mappings.TryGetValue(extension, out mime) ? mime : "application/octet-stream";
         }

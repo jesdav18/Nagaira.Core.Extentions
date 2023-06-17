@@ -8,7 +8,7 @@ namespace Nagaira.Core.Extentions.Dictionaries
         public static string GetCurrencyAlphabet(string currencyId, bool isSingular)
         {
             if (string.IsNullOrEmpty(currencyId)) return string.Empty;
-            
+
             var configurations = GetCurrencyConfigurations();
             var currencyAlphabet = configurations.FirstOrDefault(x => x.CurrencyId == currencyId && x.IsSingular == isSingular)?.CurrencyAlphabet;
 

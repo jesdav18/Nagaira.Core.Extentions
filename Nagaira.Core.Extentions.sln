@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nagaira.Core.Extentions", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nagaira.DataLayer.Core", "Nagaira.DataLayer.Core\Nagaira.DataLayer.Core.csproj", "{615FA32B-D3AF-43C6-B67C-7C42FA4DB2AB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nagaira.WebApi.Utilities", "Nagaira.WebApi.Utilities\Nagaira.WebApi.Utilities.csproj", "{C3312845-DFB8-4A4A-B675-E088553CCDA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nagaira.Core.WebApi", "Nagaira.Core.WebApi\Nagaira.Core.WebApi.csproj", "{7EE61287-90B5-43DC-A72C-C56E0FBB8FA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{615FA32B-D3AF-43C6-B67C-7C42FA4DB2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{615FA32B-D3AF-43C6-B67C-7C42FA4DB2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{615FA32B-D3AF-43C6-B67C-7C42FA4DB2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3312845-DFB8-4A4A-B675-E088553CCDA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3312845-DFB8-4A4A-B675-E088553CCDA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3312845-DFB8-4A4A-B675-E088553CCDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3312845-DFB8-4A4A-B675-E088553CCDA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE61287-90B5-43DC-A72C-C56E0FBB8FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE61287-90B5-43DC-A72C-C56E0FBB8FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE61287-90B5-43DC-A72C-C56E0FBB8FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE61287-90B5-43DC-A72C-C56E0FBB8FA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

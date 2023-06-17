@@ -4,7 +4,7 @@
     {
         //Funcionality worked for spanish
         public static string ToLetters(this decimal value, string currencyId)
-        {      
+        {
             int intPart = (int)value;
             var totalLetters = intPart.ToAlphabet(currencyId);
 

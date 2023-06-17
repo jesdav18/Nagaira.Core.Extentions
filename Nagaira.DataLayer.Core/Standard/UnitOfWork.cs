@@ -20,7 +20,7 @@ namespace Farsiman.Infraestructure.Core.Entity.Standard
         {
             return new EntityRepository<TEntity>(dbContext, this);
         }
-        
+
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
         {
             IsolationLevel isolation = GetIsolation(isolationLevel);
@@ -61,7 +61,7 @@ namespace Farsiman.Infraestructure.Core.Entity.Standard
         public void Commit()
         {
             if (_transaccion == null) return;
-           
+
             _transaccion.Commit();
             _transaccion.Dispose();
             _transaccion = null;
@@ -70,7 +70,7 @@ namespace Farsiman.Infraestructure.Core.Entity.Standard
         public virtual void RollBack()
         {
             if (_transaccion == null) return;
-         
+
             _transaccion.Rollback();
             _transaccion.Dispose();
             _transaccion = null;

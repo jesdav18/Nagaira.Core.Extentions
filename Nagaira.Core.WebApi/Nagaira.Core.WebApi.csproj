@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+	  <Authors>Nagaira Developers</Authors>
+	  <Version>1.0.0.1</Version>
+	  <Product>Nagaira.Core.WebApi</Product>
+	  <Description>Extensions for JWT Tokens.</Description>
+	  <Nullable>enable</Nullable>
+	  <Copyright>Nagaira 2023</Copyright>
+	  <PackageProjectUrl>https://github.com/jesdav18/Nagaira.Core.Extentions</PackageProjectUrl>
+	  <PackAsTool>False</PackAsTool>
+	  <RepositoryUrl>https://github.com/jesdav18/Nagaira.Core.Extentions</RepositoryUrl>
+	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
+	  <LangVersion>9.0</LangVersion>
+	  <FileVersion>1.0.0.1</FileVersion>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

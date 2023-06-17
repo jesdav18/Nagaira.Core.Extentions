@@ -5,7 +5,7 @@ using Nagaira.DataLayer.Core.Repositories;
 
 namespace Nagaira.DataLayer.Core.Standard
 {
-    public  class GenericUnitOfWorkBuilder<T> : IUnitOfWorkBuilder<T>, IUnitOfWorkConfigurationBuilder<T>
+    public class GenericUnitOfWorkBuilder<T> : IUnitOfWorkBuilder<T>, IUnitOfWorkConfigurationBuilder<T>
     {
         protected IServiceProvider services;
         protected Dictionary<T, Func<IServiceProvider, DbContext>> _dbContextActivator = new Dictionary<T, Func<IServiceProvider, DbContext>>();
@@ -18,7 +18,7 @@ namespace Nagaira.DataLayer.Core.Standard
         public virtual IUnitOfWork Build(T selector)
         {
             if (_unitOfWorks.ContainsKey(selector)) return _unitOfWorks[selector];
-         
+
             DbContext contexto = _dbContextActivator[selector].Invoke(services);
             UnitOfWork unitOfWork = new UnitOfWork(contexto);
             _unitOfWorks.Add(selector, unitOfWork);
@@ -27,7 +27,8 @@ namespace Nagaira.DataLayer.Core.Standard
 
         public virtual void AddResolver<TDbContext>(T selector) where TDbContext : DbContext
         {
-            _dbContextActivator.Add(selector, (services) => {
+            _dbContextActivator.Add(selector, (services) =>
+            {
                 TDbContext dbContext = services.GetService<TDbContext>()!;
                 return dbContext!;
             });

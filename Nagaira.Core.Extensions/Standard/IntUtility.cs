@@ -38,13 +38,13 @@ namespace Nagaira.Core.Extentions.Standard
             value = value - (millar * 1000);
 
             if (millar > 0)
-                totalLetters += $" {millar.Hundreds()} mil"; 
+                totalLetters += $" {millar.Hundreds()} mil";
 
             if (value == 0) goto enviar;
 
             totalLetters += $" {value.Hundreds()}";
 
-            enviar:
+        enviar:
             return $"{totalLetters.TrimStart()} {currency} netos".ToCapitalize();
         }
     }

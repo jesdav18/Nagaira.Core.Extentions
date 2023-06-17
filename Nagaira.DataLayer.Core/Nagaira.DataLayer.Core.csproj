@@ -1,21 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
 	  <Authors>Nagaira Developers</Authors>
 	  <Version>1.0.0.6</Version>
 	  <Product>Nagaira.Datalayer.Core</Product>
-	  <Description>Extensiones y utilidades para capa de datos (DbContext, patrón repositorio).</Description>
+	  <Description>Extensions for data layer, unit of work pattern.</Description>
 	  <Nullable>enable</Nullable>
-	  <Copyright>Nagaira 2022</Copyright>
-	  <PackageProjectUrl>Nagaira.com</PackageProjectUrl>
+	  <Copyright>Nagaira 2023</Copyright>
+	  <PackageProjectUrl>nagaira.com</PackageProjectUrl>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

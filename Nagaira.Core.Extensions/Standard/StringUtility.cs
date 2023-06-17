@@ -1,10 +1,10 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using Nagaira.Core.Extentions.Exceptions;
+using System;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Nagaira.Core.Extentions.Exceptions;
 
 namespace Nagaira.Core.Extentions.Standard
 {
@@ -34,7 +34,7 @@ namespace Nagaira.Core.Extentions.Standard
             for (int caracter = 0; caracter < caracteres.Length; caracter++)
             {
                 string caracterEnMinuscula = caracteres[caracter].ToLower();
-                if (char.IsLetter(caracterEnMinuscula[0])) caracteres[caracter] = $"{caracterEnMinuscula[0].ToString().ToUpper()}{caracterEnMinuscula.Substring(1, caracterEnMinuscula.Length - 1)}";           
+                if (char.IsLetter(caracterEnMinuscula[0])) caracteres[caracter] = $"{caracterEnMinuscula[0].ToString().ToUpper()}{caracterEnMinuscula.Substring(1, caracterEnMinuscula.Length - 1)}";
             }
 
             return string.Join(" ", caracteres);
@@ -131,7 +131,7 @@ namespace Nagaira.Core.Extentions.Standard
         /// <param name="value"></param>
         /// <returns name="StringContent"></returns>
         public static StringContent ToContent(this string value)
-        {     
+        {
             return new StringContent(value, Encoding.UTF8, "application/json");
         }
 
@@ -145,7 +145,7 @@ namespace Nagaira.Core.Extentions.Standard
         {
             bool isValidValue = Enum.TryParse(value, out TEnum enumValue);
             if (!isValidValue) throw new InvalidCastException($"Can not convert ('{value}') to enum time specified.");
-        
+
             return enumValue;
         }
     }
