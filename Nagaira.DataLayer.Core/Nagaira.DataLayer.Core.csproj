@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
 	  <Authors>Nagaira Developers</Authors>
-	  <Version>1.0.0.7</Version>
+	  <Version>1.0.0.9</Version>
 	  <Product>Nagaira.Datalayer.Core</Product>
 	  <Description>Extensions for data layer, unit of work pattern.</Description>
 	  <Nullable>enable</Nullable>

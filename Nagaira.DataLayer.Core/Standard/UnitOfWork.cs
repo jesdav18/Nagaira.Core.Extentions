@@ -188,5 +188,36 @@ namespace Farsiman.Infraestructure.Core.Entity.Standard
         {
             dbContext.Database.SetCommandTimeout(TimeSpan.FromSeconds(timeOut));
         }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            if (_transaccion == null)
+            {
+                try
+                {
+                    BeginTransaction();
+                    await dbContext.SaveChangesAsync();
+                    Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    RollBack();
+                    SaveChangesException(ex);
+                    return false;
+                }
+            }
+
+            try
+            {
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                SaveChangesException(ex);
+                return false;
+            }
+        }
     }
 }

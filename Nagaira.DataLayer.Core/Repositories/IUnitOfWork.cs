@@ -15,6 +15,7 @@ namespace Nagaira.DataLayer.Core.Repositories
         void Commit();
         void RollBack();
         bool SaveChanges();
+        Task<bool> SaveChangesAsync();
         void SetCommandTimeout(int timeOut = 30);
     }
 }
