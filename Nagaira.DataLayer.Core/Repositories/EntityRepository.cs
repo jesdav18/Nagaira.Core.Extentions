@@ -25,6 +25,16 @@ namespace Nagaira.DataLayer.Core.Repositories
             _dbContext.Set<TEntity>().AddRange(entities);
         }
 
+        public async Task AddAsync(TEntity entity)
+        {
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+        }
+
+        public async Task AddRangeAsync(ICollection<TEntity> entities)
+        {
+            await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+        }
+
         public IQueryable<TEntity> AsQueryable()
         {
             return _dbContext.Set<TEntity>().AsQueryable();
@@ -35,9 +45,21 @@ namespace Nagaira.DataLayer.Core.Repositories
             return _dbContext.Set<TEntity>().Where(query).ToList();
         }
 
-        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> query)
+        public void Update(TEntity entity)
         {
-            return _dbContext.Set<TEntity>().FirstOrDefault(query)!;
+            _dbContext.Set<TEntity>().Update(entity);
+        }
+
+        public async Task UpdateAsync(TEntity entity)
+        {
+            _dbContext.Set<TEntity>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateRangeAsync(ICollection<TEntity> entities)
+        {
+            _dbContext.Set<TEntity>().UpdateRange(entities);
+            await _dbContext.SaveChangesAsync();
         }
 
         public void Remove(TEntity entity)
@@ -51,15 +73,10 @@ namespace Nagaira.DataLayer.Core.Repositories
             _dbContext.Set<TEntity>().RemoveRange(entidades);
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task RemoveAllAsync(Expression<Func<TEntity, bool>> query)
         {
-            await _dbContext.Set<TEntity>().AddAsync(entity);
-        }
-
-
-        public Task AddRangeAsync(ICollection<TEntity> entities)
-        {
-            return _dbContext.Set<TEntity>().AddRangeAsync(entities);
+            List<TEntity> entidades = await WhereAsync(query);
+            _dbContext.Set<TEntity>().RemoveRange(entidades);
         }
 
         public Task<List<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> query)
@@ -72,21 +89,9 @@ namespace Nagaira.DataLayer.Core.Repositories
             return _dbContext.Set<TEntity>().FirstOrDefaultAsync(query)!;
         }
 
-        public async Task RemoveAllAsync(Expression<Func<TEntity, bool>> query)
+        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> query)
         {
-            List<TEntity> entidades = await WhereAsync(query);
-            _dbContext.Set<TEntity>().RemoveRange(entidades);
-        }
-
-        public void Update(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Update(entity);
-        }
-
-        public async Task UpdateAsync(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Update(entity);
-            await _dbContext.SaveChangesAsync();
-        }
+            return _dbContext.Set<TEntity>().FirstOrDefault(query)!;
+        }   
     }
 }
