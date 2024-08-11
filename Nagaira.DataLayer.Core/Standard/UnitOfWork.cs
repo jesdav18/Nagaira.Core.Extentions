@@ -8,55 +8,25 @@ namespace Nagaira.DataLayer.Core.Standard
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext dbContext;
+        private readonly DbContext _dbContext;
         private IDbContextTransaction? _transaccion;
+        private bool _disposed = false;
 
         public UnitOfWork(DbContext dbContext)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
-            return new EntityRepository<TEntity>(dbContext, this);
+            return new EntityRepository<TEntity>(_dbContext, this);
         }
 
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
         {
-            IsolationLevel isolation = GetIsolation(isolationLevel);
-            _transaccion = dbContext.Database.BeginTransaction();
+
+            _transaccion = _dbContext.Database.BeginTransaction();
         }
-
-        IsolationLevel GetIsolation(IsolationLevel isolationLevel)
-        {
-            switch (isolationLevel)
-            {
-                case IsolationLevel.Unspecified:
-                    return IsolationLevel.Unspecified;
-
-                case IsolationLevel.Chaos:
-                    return IsolationLevel.Chaos;
-
-                case IsolationLevel.ReadUncommitted:
-                    return IsolationLevel.ReadUncommitted;
-
-                case IsolationLevel.ReadCommitted:
-                    return IsolationLevel.ReadCommitted;
-
-                case IsolationLevel.RepeatableRead:
-                    return IsolationLevel.RepeatableRead;
-
-                case IsolationLevel.Serializable:
-                    return IsolationLevel.Serializable;
-
-                case IsolationLevel.Snapshot:
-                    return IsolationLevel.Snapshot;
-
-                default:
-                    return IsolationLevel.Unspecified;
-            }
-        }
-
 
         public void Commit()
         {
@@ -83,7 +53,7 @@ namespace Nagaira.DataLayer.Core.Standard
                 try
                 {
                     BeginTransaction();
-                    dbContext.SaveChanges();
+                    _dbContext.SaveChanges();
                     Commit();
                     return true;
                 }
@@ -97,7 +67,7 @@ namespace Nagaira.DataLayer.Core.Standard
 
             try
             {
-                dbContext.SaveChanges();
+                _dbContext.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -114,11 +84,11 @@ namespace Nagaira.DataLayer.Core.Standard
 
         public IEnumerable<T> RawSqlQuery<T>(string query, Func<DbDataReader, T> map, params object[] parameters)
         {
-            using (DbCommand command = dbContext.Database.GetDbConnection().CreateCommand())
+            using (DbCommand command = _dbContext.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = query;
                 command.CommandType = CommandType.Text;
-                dbContext.Database.OpenConnection();
+                _dbContext.Database.OpenConnection();
                 command.Parameters.AddRange(parameters);
                 if (_transaccion != null) command.Transaction = _transaccion.GetDbTransaction();
                 using (DbDataReader result = command.ExecuteReader())
@@ -135,16 +105,16 @@ namespace Nagaira.DataLayer.Core.Standard
 
         public IQueryable<T> RawSqlQuery<T>(string query, params object[] parameters) where T : class
         {
-            return dbContext.Set<T>().FromSqlRaw(query, parameters);
+            return _dbContext.Set<T>().FromSqlRaw(query, parameters);
         }
 
         public async Task<IEnumerable<T>> RawSqlQueryAsync<T>(string query, Func<DbDataReader, T> map, params object[] parameters)
         {
-            using (DbCommand command = dbContext.Database.GetDbConnection().CreateCommand())
+            using (DbCommand command = _dbContext.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = query;
                 command.CommandType = CommandType.Text;
-                await dbContext.Database.OpenConnectionAsync();
+                await _dbContext.Database.OpenConnectionAsync();
                 command.Parameters.AddRange(parameters);
                 if (_transaccion != null) command.Transaction = _transaccion.GetDbTransaction();
                 using (DbDataReader result = await command.ExecuteReaderAsync())
@@ -161,11 +131,11 @@ namespace Nagaira.DataLayer.Core.Standard
 
         public void ExecQuery(string query, params object[] parameters)
         {
-            using (DbCommand command = dbContext.Database.GetDbConnection().CreateCommand())
+            using (DbCommand command = _dbContext.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = query;
                 command.CommandType = CommandType.Text;
-                dbContext.Database.OpenConnection();
+                _dbContext.Database.OpenConnection();
                 command.Parameters.AddRange(parameters);
                 if (_transaccion != null) command.Transaction = _transaccion.GetDbTransaction();
                 command.ExecuteNonQuery();
@@ -174,11 +144,11 @@ namespace Nagaira.DataLayer.Core.Standard
 
         public async Task ExecQueryAsync(string query, params object[] parameters)
         {
-            using (DbCommand command = dbContext.Database.GetDbConnection().CreateCommand())
+            using (DbCommand command = _dbContext.Database.GetDbConnection().CreateCommand())
             {
                 command.CommandText = query;
                 command.CommandType = CommandType.Text;
-                await dbContext.Database.OpenConnectionAsync();
+                await _dbContext.Database.OpenConnectionAsync();
                 if (_transaccion != null) command.Transaction = _transaccion.GetDbTransaction();
                 command.Parameters.AddRange(parameters);
                 await command.ExecuteNonQueryAsync();
@@ -186,7 +156,26 @@ namespace Nagaira.DataLayer.Core.Standard
         }
         public void SetCommandTimeout(int timeOut = 30)
         {
-            dbContext.Database.SetCommandTimeout(TimeSpan.FromSeconds(timeOut));
+            _dbContext.Database.SetCommandTimeout(TimeSpan.FromSeconds(timeOut));
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+            if (disposing)
+            {
+                _transaccion?.Dispose();
+                _dbContext.Dispose();
+            }
+
+            _disposed = true;
+
         }
 
         public async Task<bool> SaveChangesAsync()
@@ -196,7 +185,7 @@ namespace Nagaira.DataLayer.Core.Standard
                 try
                 {
                     BeginTransaction();
-                    await dbContext.SaveChangesAsync();
+                    await _dbContext.SaveChangesAsync();
                     Commit();
                     return true;
                 }
@@ -210,7 +199,7 @@ namespace Nagaira.DataLayer.Core.Standard
 
             try
             {
-                dbContext.SaveChanges();
+                _dbContext.SaveChanges();
                 return true;
             }
             catch (Exception ex)

@@ -8,10 +8,16 @@
 	  <Description>Extensions for data layer, unit of work pattern.</Description>
 	  <Nullable>enable</Nullable>
 	  <Copyright>Nagaira 2024</Copyright>
-	  <PackageProjectUrl>nagaira.com</PackageProjectUrl>
+	  <PackageProjectUrl>https://github.com/jesdav18/Nagaira.Core.Extentions/tree/master/Nagaira.DataLayer.Core</PackageProjectUrl>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackAsTool>False</PackAsTool>
     <Nullable>enable</Nullable>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <Company>Nagaira</Company>
+    <RepositoryUrl>https://github.com/jesdav18/Nagaira.Core.Extentions/tree/master/Nagaira.DataLayer.Core</RepositoryUrl>
+    <IncludeSymbols>False</IncludeSymbols>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
