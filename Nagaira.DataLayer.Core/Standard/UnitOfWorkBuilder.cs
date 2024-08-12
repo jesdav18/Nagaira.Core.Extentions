@@ -16,20 +16,23 @@ namespace Nagaira.DataLayer.Core.Standard
         }
         public virtual IUnitOfWork Build(T selector)
         {
-            if (_unitOfWorks.ContainsKey(selector)) return _unitOfWorks[selector];
+            if (_unitOfWorks.ContainsKey(selector))
+            {
+                return _unitOfWorks[selector];
+            }
 
-            DbContext contexto = _dbContextActivator[selector].Invoke(services);
-            UnitOfWork unitOfWork = new UnitOfWork(contexto);
-            _unitOfWorks.Add(selector, unitOfWork);
-            return unitOfWork;
+            DbContext ctx = _dbContextActivator[selector].Invoke(services);
+            UnitOfWork uofw = new UnitOfWork(ctx);
+            _unitOfWorks.Add(selector, uofw);
+            return uofw;
         }
 
         public virtual void AddResolver<TDbContext>(T selector) where TDbContext : DbContext
         {
             _dbContextActivator.Add(selector, (services) =>
             {
-                TDbContext dbContext = services.GetService<TDbContext>()!;
-                return dbContext!;
+                TDbContext dbContext = services.GetService<TDbContext>();
+                return dbContext;
             });
         }
     }
@@ -38,5 +41,4 @@ namespace Nagaira.DataLayer.Core.Standard
     {
         void AddResolver<TDbContext>(T selector) where TDbContext : DbContext;
     }
-
 }

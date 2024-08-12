@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Transactions;
 
 namespace Nagaira.DataLayer.Core.Repositories
 {
@@ -25,16 +26,6 @@ namespace Nagaira.DataLayer.Core.Repositories
             _dbContext.Set<TEntity>().AddRange(entities);
         }
 
-        public async Task AddAsync(TEntity entity)
-        {
-            await _dbContext.Set<TEntity>().AddAsync(entity);
-        }
-
-        public async Task AddRangeAsync(ICollection<TEntity> entities)
-        {
-            await _dbContext.Set<TEntity>().AddRangeAsync(entities);
-        }
-
         public IQueryable<TEntity> AsQueryable()
         {
             return _dbContext.Set<TEntity>().AsQueryable();
@@ -45,21 +36,9 @@ namespace Nagaira.DataLayer.Core.Repositories
             return _dbContext.Set<TEntity>().Where(query).ToList();
         }
 
-        public void Update(TEntity entity)
+        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> query)
         {
-            _dbContext.Set<TEntity>().Update(entity);
-        }
-
-        public async Task UpdateAsync(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Update(entity);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateRangeAsync(ICollection<TEntity> entities)
-        {
-            _dbContext.Set<TEntity>().UpdateRange(entities);
-            await _dbContext.SaveChangesAsync();
+            return _dbContext.Set<TEntity>().FirstOrDefault(query)!;
         }
 
         public void Remove(TEntity entity)
@@ -73,25 +52,97 @@ namespace Nagaira.DataLayer.Core.Repositories
             _dbContext.Set<TEntity>().RemoveRange(entidades);
         }
 
+        public async Task AddAsync(TEntity entity)
+        {
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+        }
+
+        public async Task AddRangeAsync(ICollection<TEntity> entities)
+        {
+            await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+        }
+
+        public async Task<List<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> query, int? take = null)
+        {
+            if (take.HasValue) return await _dbContext.Set<TEntity>().Where(query).Take(take.Value).ToListAsync();
+            return await _dbContext.Set<TEntity>().Where(query).ToListAsync();
+        }
+
+        public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> query)
+        {
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(query)!;
+        }
+
         public async Task RemoveAllAsync(Expression<Func<TEntity, bool>> query)
         {
             List<TEntity> entidades = await WhereAsync(query);
             _dbContext.Set<TEntity>().RemoveRange(entidades);
         }
 
-        public Task<List<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> query)
+        public void Update(TEntity entity)
         {
-            return _dbContext.Set<TEntity>().Where(query).ToListAsync();
+            _dbContext.Set<TEntity>().Update(entity);
         }
 
-        public Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> query)
+        public async Task UpdateAsync(TEntity entity)
         {
-            return _dbContext.Set<TEntity>().FirstOrDefaultAsync(query)!;
+            _dbContext.Set<TEntity>().Update(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> query)
+        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
         {
-            return _dbContext.Set<TEntity>().FirstOrDefault(query)!;
+            _dbContext.Set<TEntity>().UpdateRange(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private List<TEntity> WhereReadUncommitted(Expression<Func<TEntity, bool>> query, int? take = null)
+        {
+            using (var scope = new TransactionScope(
+                TransactionScopeOption.Required,
+                new TransactionOptions()
+                {
+                    IsolationLevel = IsolationLevel.ReadUncommitted
+                }))
+            {
+
+                List<TEntity> result = new List<TEntity>();
+                if (take.HasValue) result = _dbContext.Set<TEntity>().Where(query).Take(take.Value).ToList();
+                else result = _dbContext.Set<TEntity>().Where(query).ToList();
+
+                scope.Complete();
+                return result;
+            }
+        }
+
+        private async Task<TEntity> FirstOrDefaultReadUncommittedAsync(Expression<Func<TEntity, bool>> query)
+        {
+            using (var scope = new TransactionScope(
+            TransactionScopeOption.Required,
+            new TransactionOptions()
+            {
+                IsolationLevel = IsolationLevel.ReadUncommitted
+            }))
+            {
+                TEntity result = await _dbContext.Set<TEntity>().FirstOrDefaultAsync(query);
+                scope.Complete();
+                return result;
+            }
+        }
+
+        public async Task<List<TEntity>> WhereAsyncReadUncommited(Expression<Func<TEntity, bool>> query, int? take = null)
+        {
+            return await Task.Run(() => WhereReadUncommitted(query, take));
+        }
+
+        public async Task<TEntity> FirstOrDefaultAsyncReadUncommited(Expression<Func<TEntity, bool>> query)
+        {
+            return await FirstOrDefaultReadUncommittedAsync(query);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> query)
+        {
+            return await _dbContext.Set<TEntity>().AnyAsync(query);
         }
     }
 }

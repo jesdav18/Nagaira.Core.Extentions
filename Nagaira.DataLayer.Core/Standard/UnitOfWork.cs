@@ -24,7 +24,6 @@ namespace Nagaira.DataLayer.Core.Standard
 
         public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
         {
-
             _transaccion = _dbContext.Database.BeginTransaction();
         }
 
